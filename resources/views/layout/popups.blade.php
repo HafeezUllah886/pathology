@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>CR Report</title>
+    <title>{{ projectNameHeader() }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Business Management System" name="description" />
     <meta content="Hafeez Ullah" name="author" />

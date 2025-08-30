@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use Database\Seeders\tests\Haematology;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,9 +17,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
        $this->call(userSeeder::class);
-       $this->call(type_seeder::class);
-       $this->call(charges_seeder::class);
-       
+       $this->call(Haematology::class);
 
     }
 }

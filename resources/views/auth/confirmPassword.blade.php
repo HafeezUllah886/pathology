@@ -46,7 +46,7 @@
                                     {{-- <img src="{{ asset('assets/images/logo-light.png')}}" alt="" height="20"> --}}
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">PAYMENT RECEIPT MANAGMENT</p>
+                            <p class="mt-3 fs-15 fw-medium">Pathology Lab Management System</p>
                         </div>
                     </div>
                 </div>

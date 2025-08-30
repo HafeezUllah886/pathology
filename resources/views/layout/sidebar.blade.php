@@ -56,18 +56,8 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{route('receipt.create')}}">
-                        <i class="ri-bill-line"></i> <span data-key="t-dashboards">Create Receipt</span>
-                    </a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{route('receipt.index')}}">
-                        <i class="ri-time-line"></i> <span data-key="t-dashboards">History</span>
-                    </a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{route('report.index')}}">
-                        <i class="ri-file-chart-line"></i> <span data-key="t-dashboards">Report</span>
+                    <a class="nav-link menu-link" href="{{route('dashboard')}}">
+                        <i class="ri-dashboard-line"></i> <span data-key="t-dashboards">Dashboard</span>
                     </a>
                 </li> 
                 <li class="nav-item">
@@ -78,11 +68,8 @@
                     <div class="collapse menu-dropdown" id="sales">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('type.index')}}" class="nav-link"
-                                    data-key="t-chat">Receipt Types</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{route('charges.index')}}" class="nav-link" data-key="t-chat"> Charges </a>
+                                <a href="{{route('tests.index')}}" class="nav-link"
+                                    data-key="t-chat">Tests</a>
                             </li>
                         </ul>
                     </div>

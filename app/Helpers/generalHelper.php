@@ -21,45 +21,16 @@ function lastDayOfMonth()
 
 function projectNameAuth()
 {
-    return "DR ABDUL BARI KAKAR";
+    return "DAWOOD LAB";
 }
 
 function projectNameHeader()
 {
-    return "DR ABDUL BARI KAKAR";
+    return "DAWOOD LAB";
 }
 function projectNameShort()
 {
-    return "ABK";
+    return "DL";
 }
 
-function token_number($id)
-{
-    // Find the current receipt
-    $currentReceipt = receipt::findOrFail($id);
-    
-    // Get the entries for the specific date of this receipt, ordered by created_at
-    $entries = receipt::whereDate('created_at', $currentReceipt->created_at)
-        ->orderBy('created_at', 'asc')
-        ->get();
-    
-    // Find the sequential number of the current entry
-    $token = $entries->search(function ($entry) use ($id) {
-        return $entry->id === $id;
-    });
-    
-    // Add 1 to convert from 0-indexed to 1-indexed
-    return $token !== false ? $token + 1 : null;
-}
 
-function receipt() {
-
-    $receipt = receipt::count();
-
-    if($receipt > 50)
-    {
-        return 0;
-    }
-    return 1;
-
-}

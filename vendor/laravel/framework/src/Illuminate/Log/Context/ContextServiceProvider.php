@@ -2,6 +2,7 @@
 
 namespace Illuminate\Log\Context;
 
+use Illuminate\Contracts\Log\ContextLogProcessor as ContextLogProcessorContract;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Queue\Queue;
 use Illuminate\Support\Facades\Context;
@@ -17,6 +18,8 @@ class ContextServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->scoped(Repository::class);
+
+        $this->app->bind(ContextLogProcessorContract::class, fn () => new ContextLogProcessor());
     }
 
     /**
@@ -27,6 +30,7 @@ class ContextServiceProvider extends ServiceProvider
     public function boot()
     {
         Queue::createPayloadUsing(function ($connection, $queue, $payload) {
+            /** @phpstan-ignore staticMethod.notFound */
             $context = Context::dehydrate();
 
             return $context === null ? $payload : [
@@ -36,6 +40,7 @@ class ContextServiceProvider extends ServiceProvider
         });
 
         $this->app['events']->listen(function (JobProcessing $event) {
+            /** @phpstan-ignore staticMethod.notFound */
             Context::hydrate($event->job->payload()['illuminate:log:context'] ?? null);
         });
     }

@@ -46,7 +46,7 @@
                                     {{-- <img src="{{ asset('assets/images/logo-light.png')}}" alt="" height="20"> --}}
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">PAYMENT RECEIPT MANAGMENT</p>
+                            <p class="mt-3 fs-15 fw-medium">Pathology Lab Management System</p>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                                         @csrf
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Username</label>
-                                            <input type="text" name="name" class="form-control" id="username" placeholder="Enter username">
+                                            <input type="text" name="name" class="form-control" autofocus id="username" placeholder="Enter username">
                                         </div>
 
                                         <div class="mb-3">
