@@ -17,7 +17,6 @@ class Haematology extends Seeder
     {
         $test = Tests::create([
             'name' => 'Haematology',
-            'rate' => 100,
             'status' => 'Active',
         ]);
 
@@ -221,8 +220,5 @@ class Haematology extends Seeder
             'type' => 'Text',
             'options' => array("Normal on Smear", "Abnormal on Smear"),
         ]);
-
-
-
     }
 }

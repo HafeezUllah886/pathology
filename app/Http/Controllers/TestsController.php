@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tests;
+use App\Models\Test_groups;
 use Illuminate\Http\Request;
 
 class TestsController extends Controller
@@ -10,10 +11,12 @@ class TestsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(request $request)
     {
-        $tests = Tests::all();
-        return view('tests.index', compact('tests'));
+        $tests = Tests::where('test_groups_id', $request->id)->get();
+
+        $group = Test_groups::find($request->id);
+        return view('groups.tests.index', compact('tests', 'group'));
     }
 
     /**
@@ -31,7 +34,6 @@ class TestsController extends Controller
     {
         $request->validate([
             'name' => 'required | unique:tests,name',
-            'rate' => 'required',
             'status' => 'required',
         ]);
         Tests::create($request->all());
@@ -61,7 +63,6 @@ class TestsController extends Controller
     {
         $request->validate([
             'name' => 'required | unique:tests,name,' . $id,
-            'rate' => 'required',
             'status' => 'required',
         ]);
         Tests::find($id)->update($request->all());

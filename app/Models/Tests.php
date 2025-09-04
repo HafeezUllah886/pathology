@@ -8,14 +8,14 @@ class Tests extends Model
 {
     protected $guarded = [];
 
-    public function groups()
+    public function parameters()
     {
-        return $this->belongsToMany(Test_groups::class);
+        return $this->hasMany(test_parameters::class);
     }
 
-    public function values()
+    public function group()
     {
-        return $this->hasMany(Test_values::class);
+        return $this->belongsTo(Test_groups::class);
     }
 
     public function scopeActive($query)

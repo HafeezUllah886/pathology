@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('test_values', function (Blueprint $table) {
+        Schema::create('test_parameters', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('test_id')->constrained('tests')->cascadeOnDelete();
-            $table->foreignId('test_group_id')->constrained('test_groups')->cascadeOnDelete();
-            $table->string('name');
+            $table->foreignId('tests_id')->constrained('tests')->cascadeOnDelete();
+            $table->string('title');
             $table->string('unit')->nullable();
             $table->text('normal_range')->nullable();
             $table->string('type')->default('Numeric');
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('test_values');
+        Schema::dropIfExists('test_parameters');
     }
 };

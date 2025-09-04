@@ -4,23 +4,32 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h3>Tests Groups - {{ $test->name }}</h3>
+                    <h3>Tests Groups</h3>
                     <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#new">Create
                         New</button>
                 </div>
                 <div class="card-body">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                     <table class="table" id="buttons-datatables">
                         <thead>
                             <th>#</th>
-                            <th colspan="4">Group Name</th>
+                            <th>Group Name</th>
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            @foreach ($test_groups as $key => $test_group)
-                                <tr class="table-active">
-                                    <th >{{ $key + 1 }}</th>
-                                    <th  colspan="4">{{ $test_group->name }}</th>
-                                    <th>
+                            @foreach ($groups as $key => $group)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $group->name }}</td>
+                                    <td>
                                         <div class="dropdown">
                                             <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -28,56 +37,39 @@
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
                                                 <li>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('tests.index', ['id'=>$group->id]) }}">
+                                                        <i class="ri-stack-fill align-bottom me-2 text-muted"></i>
+                                                        Manage Tests
+                                                    </a>
+                                                </li>
+                                                <li>
                                                     <a class="dropdown-item" data-bs-toggle="modal"
-                                                        data-bs-target="#edit_{{ $test_group->id }}">
+                                                        data-bs-target="#edit_{{ $group->id }}">
                                                         <i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
                                                         Edit
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('test_values.index', ['id' => $test_group->id]) }}">
-                                                        <i class="ri-stack-fill align-bottom me-2 text-muted"></i>
-                                                        Manage Values
-                                                    </a>
-                                                </li>
+                                                
                                             </ul>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Value Title</th>
-                                    <th>Unit</th>
-                                    <th>Normal Range</th>
-                                    <th>Type</th>
-                                    <th>Options / Hints</th>
-                                </tr>
-                                @foreach ($test_group->values as $key => $value)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $value->name }}</td>
-                                    <td>{{ $value->unit }}</td>
-                                    <td>{!! $value->normal_range !!}</td>
-                                    <td>{{ $value->type }}</td>
-                                    <td>{!! is_array($value->options) ? implode('<br>', $value->options) : $value->options !!}</td>
-                                </tr>
-                                @endforeach
-                                <div id="edit_{{ $test_group->id }}" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"
+                                <div id="edit_{{ $group->id }}" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"
                                 style="display: none;">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="myModalLabel">Edit Test Group - {{ $test_group->name }}</h5>
+                                            <h5 class="modal-title" id="myModalLabel">Edit Group - {{ $group->name }}</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
                                         </div>
-                                        <form action="{{ route('test_groups.update', $test_group->id) }}" method="post">
+                                        <form action="{{ route('test_groups.update', $group->id) }}" method="post">
                                             @csrf
                                             @method('patch')
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label for="name">Test Group Name</label>
-                                                    <input type="text" name="name" required value="{{ $test_group->name }}" id="name" class="form-control">
+                                                    <label for="name">Test Name</label>
+                                                    <input type="text" name="name" required value="{{ $group->name }}" id="name" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -106,10 +98,9 @@
                 </div>
                 <form action="{{ route('test_groups.store') }}" method="post">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $test->id }}">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Test Group Name</label>
+                            <label for="name">Test Name</label>
                             <input type="text" name="name" required id="name" class="form-control">
                         </div>
                     </div>

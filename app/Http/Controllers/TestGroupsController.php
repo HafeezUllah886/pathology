@@ -11,13 +11,11 @@ class TestGroupsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $id = $request->id;
-        $test_groups = Test_groups::where('test_id', $request->id)->get();
+        $groups = Test_groups::all();
 
-        $test = Tests::find($request->id);
-        return view('tests.groups.index', compact('test_groups', 'test'));
+        return view('groups.index', compact('groups'));
     }
 
     /**
@@ -33,11 +31,13 @@ class TestGroupsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|unique:test_groups,name',
+        ]);
         $test_group = Test_groups::create([
-            'test_id' => $request->id,
             'name' => $request->name,
         ]);
-        return redirect()->route('test_groups.index', ['id' => $request->id]);
+        return redirect()->route('test_groups.index');
     }
 
     /**
@@ -59,9 +59,15 @@ class TestGroupsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Test_groups $test_groups)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:test_groups,name,'.$id,
+        ]);
+        $test_group = Test_groups::find($id);
+        $test_group->name = $request->name;
+        $test_group->save();
+        return redirect()->route('test_groups.index');
     }
 
     /**

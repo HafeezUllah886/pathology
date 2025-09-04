@@ -4,16 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Test_values extends Model
+class Test_parameters extends Model
 {
     protected $guarded = [];
 
-    public function group()
+    public function test()
     {
-        return $this->belongsTo(Test_groups::class);
+        return $this->belongsTo(tests::class);
     }
-
+    
     protected $casts = [
         'options' => 'array',
     ];
+   
 }

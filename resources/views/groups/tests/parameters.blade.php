@@ -9,23 +9,23 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-6">
-                                    <h3> Manage Values - {{$group->name}} </h3>
+                                    <h3> Manage Parameters - {{$test->name}} </h3>
                                 </div>
-                                <div class="col-6 d-flex flex-row-reverse"><a href="{{ route('test_groups.index') }}"
+                                <div class="col-6 d-flex flex-row-reverse"><a href="{{ route('tests.index') }}"
                                         class="btn btn-danger">Close</a></div>
                             </div>
                         </div>
                     </div>
-                </div><!--end row-->
+                </div>
                 <div class="card-body">
-                    <form action="{{ route('test_values.store', ['id' => $group->id]) }}" method="post">
+                    <form action="{{ route('test_parameters.store', ['id' => $test->id]) }}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-6">
-                                <h4>Values</h4>
+                                <h4>Parameters</h4>
                             </div>
                             <div class="col-6 d-flex flex-row-reverse"><button type="button" onclick="addTestValue()"
-                                    class="btn btn-primary">Add Value (Alt)</button></div>
+                                    class="btn btn-primary">Add Parameter (Alt)</button></div>
                             
                             <div class="row">
                                 <div class="col-12">
@@ -39,16 +39,16 @@
                                             <th></th>
                                         </thead> 
                                         <tbody id="test_values">
-                                            @foreach ($group->values as $key => $value)
+                                            @foreach ($parameters as $key => $parameter)
                                             @php
                                                 $key = $key + 1;
                                             @endphp
                                             <tr id="row_{{ $key }}">
-                                                <td><input type="text" name="name[]" value="{{ $value->name }}" required id="name_{{ $key }}" class="form-control"></td>
-                                                <td><input type="text" name="unit[]" value="{{ $value->unit }}" required id="unit_{{ $key }}" class="form-control"></td>
-                                                <td><textarea name="normal_range[]" required id="normal_range_{{ $key }}" class="form-control">{!! $value->normal_range !!}</textarea></td>
-                                                <td><select name="type[]" required id="type_{{ $key }}" class="form-control"> <option value="Numaric" @selected($value->type == 'Numaric')>Numaric</option><option value="Text" @selected($value->type == 'Text')>Text</option><option value="Select" @selected($value->type == 'Select')>Select</option></select></td>
-                                                <td><textarea name="options[]" id="options_{{ $key }}" placeholder="Seperated by comma" class="form-control">{{ is_array($value->options) ? implode(', ', $value->options) : $value->options }}</textarea></td>
+                                                <td><input type="text" name="name[]" value="{{ $parameter->title }}" required id="name_{{ $key }}" class="form-control"></td>
+                                                <td><input type="text" name="unit[]" value="{{ $parameter->unit }}" required id="unit_{{ $key }}" class="form-control"></td>
+                                                <td><textarea name="normal_range[]" required id="normal_range_{{ $key }}" class="form-control">{!! $parameter->normal_range !!}</textarea></td>
+                                                <td><select name="type[]" required id="type_{{ $key }}" class="form-control"> <option value="Numaric" @selected($parameter->type == 'Numaric')>Numaric</option><option value="Text" @selected($parameter->type == 'Text')>Text</option><option value="Select" @selected($parameter->type == 'Select')>Select</option></select></td>
+                                                <td><textarea name="options[]" id="options_{{ $key }}" placeholder="Seperated by comma" class="form-control">{{ is_array($parameter->options) ? implode(', ', $parameter->options) : $parameter->options }}</textarea></td>
                                                 <td><span class="btn btn-sm btn-danger" onclick="deleteTestValue({{ $key }})">X</span></td>
                                             </tr>
                                             @endforeach
@@ -91,7 +91,7 @@
             });
         });
      
-        var test_id = {{ $group->values()->count() }};
+        var test_id = {{ $test->parameters()->count() }};
         function addTestValue() {
             test_id++;
             var $newRow = $('<tr id="row_' + test_id + '">' +

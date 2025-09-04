@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tests;
 use App\Models\Test_groups;
-use App\Models\Test_values;
+use App\Models\Test_parameters;
 use Illuminate\Http\Request;
 
-class TestValuesController extends Controller
+class TestParametersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,9 @@ class TestValuesController extends Controller
     public function index(Request $request)
     {
         $id = $request->id;
-        $group = Test_groups::find($id);
-        return view('tests.groups.values', compact('group'));
+        $test = Tests::find($id);
+        $parameters = test_parameters::where('tests_id', $id)->get();
+        return view('groups.tests.parameters', compact('test', 'parameters'));
     }
 
     /**
@@ -31,22 +33,21 @@ class TestValuesController extends Controller
      */
     public function store(Request $request)
     {
-        $group = Test_groups::find($request->id);
-        $group->values()->delete();
+        $test = Tests::find($request->id);
+        $test->parameters()->delete();
 
         $values = $request->name;
         foreach ($values as $key => $value) {   
-            $value = Test_values::create([
-                'test_group_id' => $group->id,
-                'test_id' => $group->test_id,
-                'name' => $value,
+            $value = Test_parameters::create([
+                'tests_id' => $test->id,
+                'title' => $value,
                 'unit' => $request->unit[$key],
                 'normal_range' => $request->normal_range[$key],
                 'type' => $request->type[$key],
                 'options' => array_map('trim', explode(',', $request->options[$key])),
         ]);
     }
-    return redirect()->route('test_groups.index', ['id' => $group->id]);
+    return redirect()->route('tests.index', ['id' => $test->id]);
     }
 
     /**

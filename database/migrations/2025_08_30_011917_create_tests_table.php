@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('test_groups', function (Blueprint $table) {
+        Schema::create('tests', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('test_groups_id')->constrained('test_groups')->cascadeOnDelete();
             $table->string('name');
-            $table->foreignId('test_id')->constrained('tests')->cascadeOnDelete();
+            $table->decimal('rate', 10, 2);
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('test_groups');
+        Schema::dropIfExists('tests');
     }
 };
