@@ -15,19 +15,19 @@ class Haematology extends Seeder
      */
     public function run(): void
     {
-        $test = Tests::create([
+        $test_group = Test_groups::create([
             'name' => 'Haematology',
             'status' => 'Active',
         ]);
 
-        $test_group = Test_groups::create([
-            'name' => 'Haematology',
-            'test_id' => $test->id,
+        $test = Tests::create([
+            'name' => 'CBC',
+            'rate' => 1200,
+            'test_groups_id' => $test_group->id,
         ]);
 
-        $test_value = Test_values::create([
-            'name' => 'Haemoglobin',
-            'test_group_id' => $test_group->id,
+        $test_value = Test_parameters::create([
+            'title' => 'Haemoglobin',
             'test_id' => $test->id,
             'unit' => 'g/dl',
             'normal_range' => "Male: 12.1-16.7\nFemale: 12.1-16.7",
@@ -35,9 +35,8 @@ class Haematology extends Seeder
             'options' => null,
         ]);
 
-        $test_value = Test_values::create([
-            'name' => 'RBC Count',
-            'test_group_id' => $test_group->id,
+        $test_value = Test_parameters::create([
+            'title' => 'RBC Count',
             'test_id' => $test->id,
             'unit' => 'M/cu mm',
             'normal_range' => "Male: 4.5-6.0\nFemale: 4.0-5.5",
@@ -45,9 +44,8 @@ class Haematology extends Seeder
             'options' => null,
         ]);
 
-        $test_value = Test_values::create([
-            'name' => 'WBC Count',
-            'test_group_id' => $test_group->id,
+        $test_value = Test_parameters::create([
+            'title' => 'WBC Count',
             'test_id' => $test->id,
             'unit' => 'cu mm',
             'normal_range' => "4,000 - 10,000",
@@ -55,8 +53,8 @@ class Haematology extends Seeder
             'options' => null,
         ]);
 
-        $test_value = Test_values::create([
-            'name' => 'Platelet Count',
+        $test_value = Test_parameters::create([
+            'title' => 'Platelet Count',
             'test_group_id' => $test_group->id,
             'test_id' => $test->id,
             'unit' => 'cu mm',
@@ -65,12 +63,12 @@ class Haematology extends Seeder
             'options' => null,
         ]);
         
-        $test_group = Test_groups::create([
+      /*   $test_group = Test_parameters::create([
             'name' => 'Absolute Indices',
             'test_id' => $test->id,
         ]);
 
-        $test_value = Test_values::create([
+        $test_value = Test_parameters::create([
             'name' => 'PCV (HCT)',
             'test_group_id' => $test_group->id,
             'test_id' => $test->id,
@@ -80,7 +78,7 @@ class Haematology extends Seeder
             'options' => null,
         ]);
 
-        $test_value = Test_values::create([
+        $test_value = Test_parameters::create([
             'name' => 'MCV',
             'test_group_id' => $test_group->id,
             'test_id' => $test->id,
@@ -90,7 +88,7 @@ class Haematology extends Seeder
             'options' => null,
         ]);
 
-        $test_value = Test_values::create([
+        $test_value = Test_parameters::create([
             'name' => 'MCH',
             'test_group_id' => $test_group->id,
             'test_id' => $test->id,
@@ -100,7 +98,7 @@ class Haematology extends Seeder
             'options' => null,
         ]);
 
-        $test_value = Test_values::create([
+        $test_value = Test_parameters::create([
             'name' => 'MCHC',
             'test_group_id' => $test_group->id,
             'test_id' => $test->id,
@@ -110,12 +108,12 @@ class Haematology extends Seeder
             'options' => null,
         ]);
 
-        $test_group = Test_groups::create([
+        $test_group = Test_parameters::create([
             'name' => 'Differential Leucocytes Count',
             'test_id' => $test->id,
         ]);
 
-        $test_value = Test_values::create([
+        $test_value = Test_parameters::create([
             'name' => 'Neutrophils',
             'test_group_id' => $test_group->id,
             'test_id' => $test->id,
@@ -125,7 +123,7 @@ class Haematology extends Seeder
             'options' => null,
         ]);
 
-        $test_value = Test_values::create([
+        $test_value = Test_parameters::create([
             'name' => 'Lymphocytes',
             'test_group_id' => $test_group->id,
             'test_id' => $test->id,
@@ -135,7 +133,7 @@ class Haematology extends Seeder
             'options' => null,
         ]);
 
-        $test_value = Test_values::create([
+        $test_value = Test_parameters::create([
             'name' => 'Monocytes',
             'test_group_id' => $test_group->id,
             'test_id' => $test->id,
@@ -145,7 +143,7 @@ class Haematology extends Seeder
             'options' => null,
         ]);
 
-        $test_value = Test_values::create([
+        $test_value = Test_parameters::create([
             'name' => 'Eosinophils',
             'test_group_id' => $test_group->id,
             'test_id' => $test->id,
@@ -155,7 +153,7 @@ class Haematology extends Seeder
             'options' => null,
         ]);
 
-        $test_value = Test_values::create([
+        $test_value = Test_parameters::create([
             'name' => 'Basophils',
             'test_group_id' => $test_group->id,
             'test_id' => $test->id,
@@ -219,6 +217,6 @@ class Haematology extends Seeder
             'normal_range' => null,
             'type' => 'Text',
             'options' => array("Normal on Smear", "Abnormal on Smear"),
-        ]);
+        ]); */
     }
 }
