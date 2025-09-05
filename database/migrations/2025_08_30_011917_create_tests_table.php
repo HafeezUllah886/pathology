@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('test_groups_id')->constrained('test_groups')->cascadeOnDelete();
             $table->string('name');
             $table->decimal('rate', 10, 2);
+            $table->string('report_time')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
         });

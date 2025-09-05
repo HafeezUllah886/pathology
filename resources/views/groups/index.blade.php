@@ -36,18 +36,19 @@
                                                 <i class="ri-more-fill align-middle"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
-                                                <li>
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('tests.index', ['id'=>$group->id]) }}">
-                                                        <i class="ri-stack-fill align-bottom me-2 text-muted"></i>
-                                                        Manage Tests
-                                                    </a>
-                                                </li>
+                                               
                                                 <li>
                                                     <a class="dropdown-item" data-bs-toggle="modal"
                                                         data-bs-target="#edit_{{ $group->id }}">
                                                         <i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
                                                         Edit
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('tests.index', ['id'=>$group->id]) }}">
+                                                        <i class="ri-stack-fill align-bottom me-2 text-muted"></i>
+                                                        Manage Tests
                                                     </a>
                                                 </li>
                                                 

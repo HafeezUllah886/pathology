@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use Database\Seeders\tests\Andrology;
 use Database\Seeders\tests\Haematology;
+use Database\Seeders\tests\Biochemistry;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,7 +20,9 @@ class DatabaseSeeder extends Seeder
 
        $this->call(userSeeder::class);
        $this->call(unitsSeeder::class);
+       $this->call(Biochemistry::class);
        $this->call(Haematology::class);
+       $this->call(Andrology::class);
 
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders\tests;
 
 use App\Models\Test_groups;
+use App\Models\Test_parameters;
 use App\Models\Test_values;
 use App\Models\Tests;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,206 +18,206 @@ class Haematology extends Seeder
     {
         $test_group = Test_groups::create([
             'name' => 'Haematology',
-            'status' => 'Active',
         ]);
+
+        //CBC
 
         $test = Tests::create([
             'name' => 'CBC',
-            'rate' => 1200,
+            'rate' => 300,
+            'report_time' => '1 hour 30 minutes',
             'test_groups_id' => $test_group->id,
         ]);
 
-        $test_value = Test_parameters::create([
+        Test_parameters::create([
             'title' => 'Haemoglobin',
-            'test_id' => $test->id,
+            'tests_id' => $test->id,
             'unit' => 'g/dl',
             'normal_range' => "Male: 12.1-16.7\nFemale: 12.1-16.7",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
+
+        Test_parameters::create([
             'title' => 'RBC Count',
-            'test_id' => $test->id,
-            'unit' => 'M/cu mm',
+            'tests_id' => $test->id,
+            'unit' => '×10⁶/µl',
             'normal_range' => "Male: 4.5-6.0\nFemale: 4.0-5.5",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
+        Test_parameters::create([
             'title' => 'WBC Count',
-            'test_id' => $test->id,
-            'unit' => 'cu mm',
-            'normal_range' => "4,000 - 10,000",
+            'tests_id' => $test->id,
+            'unit' => '×10³/µl',
+            'normal_range' => "4.0 - 10.0",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
+        Test_parameters::create([
             'title' => 'Platelet Count',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
-            'unit' => 'cu mm',
-            'normal_range' => "150,000 - 400,000",
+            'tests_id' => $test->id,
+            'unit' => '×10³/µl',
+            'normal_range' => "150 - 400",
             'type' => 'Numeric',
             'options' => null,
         ]);
-        
-      /*   $test_group = Test_parameters::create([
-            'name' => 'Absolute Indices',
-            'test_id' => $test->id,
+
+        Test_parameters::create([
+            'title' => 'Reticulocyte Count',
+            'tests_id' => $test->id,
+            'unit' => '%',
+            'normal_range' => "0.5 - 2.0",
+            'type' => 'Numeric',
+            'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
-            'name' => 'PCV (HCT)',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+
+        Test_parameters::create([
+            'title' => 'Absolute Indices',
+            'tests_id' => $test->id,
+            'unit' => null,
+            'normal_range' => null,
+            'type' => 'Heading',
+            'options' => null,
+        ]);
+
+        Test_parameters::create([
+            'title' => 'PCV (HCT)',
+            'tests_id' => $test->id,
             'unit' => '%',
             'normal_range' => "Male: 40 - 55\nFemale: 37 - 47",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
-            'name' => 'MCV',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
-            'unit' => 'fL',
+        Test_parameters::create([
+            'title' => 'MCV',
+            'tests_id' => $test->id,
+            'unit' => 'fl',
             'normal_range' => "76-96",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
-            'name' => 'MCH',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'MCH',
+            'tests_id' => $test->id,
             'unit' => 'pg',
             'normal_range' => "28-32",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
-            'name' => 'MCHC',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'MCHC',
+            'tests_id' => $test->id,
             'unit' => 'g/dl',
             'normal_range' => "32-36",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
-        $test_group = Test_parameters::create([
-            'name' => 'Differential Leucocytes Count',
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'Differential Leukocytes Count',
+            'tests_id' => $test->id,
+            'unit' => null,
+            'normal_range' => null,
+            'type' => 'Heading',
+            'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
-            'name' => 'Neutrophils',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'Neutrophils',
+            'tests_id' => $test->id,
             'unit' => '%',
             'normal_range' => "40 - 75",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
-            'name' => 'Lymphocytes',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'Lymphocytes',
+            'tests_id' => $test->id,
             'unit' => '%',
             'normal_range' => "20 - 50",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
-            'name' => 'Monocytes',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'Monocytes',
+            'tests_id' => $test->id,
             'unit' => '%',
             'normal_range' => "2 - 10",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
-            'name' => 'Eosinophils',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'Eosinophils',
+            'tests_id' => $test->id,
             'unit' => '%',
             'normal_range' => "1 - 6",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
-        $test_value = Test_parameters::create([
-            'name' => 'Basophils',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'Basophils',
+            'tests_id' => $test->id,
             'unit' => '%',
             'normal_range' => "0 - 1",
             'type' => 'Numeric',
             'options' => null,
         ]);
 
+        //Peripheral Blood Smear (PBS)
 
-        $test_group = Test_groups::create([
-            'name' => 'Peripheral Smear Findings',
-            'test_id' => $test->id,
+        $test = Tests::create([
+            'name' => 'Peripheral Blood Smear (PBS)',
+            'rate' => 300,
+            'report_time' => '1 hour 30 minutes',
+            'test_groups_id' => $test_group->id,
         ]);
 
-        $test_value = Test_values::create([
-            'name' => 'Immature Cells',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'Immature Cells',
+            'tests_id' => $test->id,
             'unit' => null,
             'normal_range' => null,
             'type' => 'Text',
             'options' => array("No Immature Cells Found", "Immature Cells Present"),
         ]);
 
-        $test_value = Test_values::create([
-            'name' => 'RBC Morphology',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'RBC Morphology',
+            'tests_id' => $test->id,
             'unit' => null,
             'normal_range' => null,
             'type' => 'Select',
             'options' => array("Anisocytosis","Microcytosis", "Hypochromia", "Polycyosis", "Target Cells", "Eliptical Cells", "Abnormal"),
         ]);
 
-        $test_value = Test_values::create([
-            'name' => 'WBC Morphology',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
-            'unit' => null,
-            'normal_range' => null,
-            'type' => 'Select',
-            'options' => array("Anisocytosis", "Polycyosis", "Target Cells", "Abnormal"),
-        ]);
-
-        $test_value = Test_values::create([
-            'name' => 'Haemoparasites',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'Haemoparasites',
+            'tests_id' => $test->id,
             'unit' => null,
             'normal_range' => null,
             'type' => 'Text',
             'options' => array("No Malaria Parasites Found", "Malaria Parasites Present"),
         ]);
 
-        $test_value = Test_values::create([
-            'name' => 'Platelet Estimation',
-            'test_group_id' => $test_group->id,
-            'test_id' => $test->id,
+        Test_parameters::create([
+            'title' => 'Platelet Estimation',
+            'tests_id' => $test->id,
             'unit' => null,
             'normal_range' => null,
             'type' => 'Text',
             'options' => array("Normal on Smear", "Abnormal on Smear"),
-        ]); */
+        ]); 
     }
 }

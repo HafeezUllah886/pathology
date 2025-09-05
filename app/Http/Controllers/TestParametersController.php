@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tests;
 use App\Models\Test_groups;
 use App\Models\Test_parameters;
+use App\Models\units;
 use Illuminate\Http\Request;
 
 class TestParametersController extends Controller
@@ -16,8 +17,9 @@ class TestParametersController extends Controller
     {
         $id = $request->id;
         $test = Tests::find($id);
-        $parameters = test_parameters::where('tests_id', $id)->get();
-        return view('groups.tests.parameters', compact('test', 'parameters'));
+        $parameters = test_parameters::where('tests_id', $id)->orderBy('sort', 'asc')->get();
+        $units = units::orderBy('name', 'asc')->get();
+        return view('groups.tests.parameters', compact('test', 'parameters', 'units'));
     }
 
     /**
@@ -40,6 +42,7 @@ class TestParametersController extends Controller
         foreach ($values as $key => $value) {   
             $value = Test_parameters::create([
                 'tests_id' => $test->id,
+                'sort' => $request->sort[$key],
                 'title' => $value,
                 'unit' => $request->unit[$key],
                 'normal_range' => $request->normal_range[$key],
@@ -53,7 +56,7 @@ class TestParametersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Test_values $test_values)
+    public function show(Test_parameters $test_values)
     {
         //
     }
@@ -61,7 +64,7 @@ class TestParametersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Test_values $test_values)
+    public function edit(Test_parameters $test_values)
     {
         //
     }
@@ -69,7 +72,7 @@ class TestParametersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Test_values $test_values)
+    public function update(Request $request, Test_parameters $test_values)
     {
         //
     }
@@ -77,7 +80,7 @@ class TestParametersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Test_values $test_values)
+    public function destroy(Test_parameters $test_values)
     {
         //
     }

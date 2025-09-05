@@ -14,6 +14,7 @@
                             <th>#</th>
                             <th>Test Name</th>
                             <th>Rate</th>
+                            <th>Report Time</th>
                             <th>Status</th>
                             <th>Action</th>
                         </thead>
@@ -23,6 +24,7 @@
                                     <th >{{ $key + 1 }}</th>
                                     <th>{{ $test->name }}</th>
                                     <th>{{ $test->rate }}</th>
+                                    <th>{{ $test->report_time }}</th>
                                     <th>{{ $test->status }}</th>
                                     <th>
                                         <div class="dropdown">
@@ -31,6 +33,7 @@
                                                 <i class="ri-more-fill align-middle"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
+                                                
                                                 <li>
                                                     <a class="dropdown-item" data-bs-toggle="modal"
                                                         data-bs-target="#edit_{{ $test->id }}">
@@ -45,6 +48,7 @@
                                                         Manage Parameters
                                                     </a>
                                                 </li>
+                                                    
                                             </ul>
                                         </div>
                                     </td>
@@ -61,19 +65,22 @@
                                             @csrf
                                             @method('patch')
                                             <div class="modal-body">
-                                                <div class="form-group">
+                                                <div class="form-group mt-2">
                                                     <label for="name">Test Name</label>
                                                     <input type="text" name="name" required value="{{ $test->name }}" id="name" class="form-control">
                                                 </div>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
+                                           
+                                                <div class="form-group mt-2">
                                                     <label for="rate">Rate</label>
                                                     <input type="text" name="rate" required value="{{ $test->rate }}" id="rate" class="form-control">
                                                 </div>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
+                                           
+                                                <div class="form-group mt-2">
+                                                    <label for="report_time">Report Time</label>
+                                                    <input type="text" name="report_time" required value="{{ $test->report_time }}" id="report_time" class="form-control">
+                                                </div>
+                                            
+                                                <div class="form-group mt-2">
                                                     <label for="status">Status</label>
                                                     <select name="status" required value="{{ $test->status }}" class="form-control">
                                                         <option value="Active" {{ $test->status == 'Active' ? 'selected' : '' }}>Active</option>
@@ -109,15 +116,19 @@
                     @csrf
                     <input type="hidden" name="test_groups_id" value="{{ $group->id }}">
                     <div class="modal-body">
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="name">Test Name</label>
                             <input type="text" name="name" required id="name" class="form-control">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="rate">Rate</label>
                             <input type="text" name="rate" required id="rate" class="form-control">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-2">
+                            <label for="report_time">Report Time</label>
+                            <input type="text" name="report_time" required id="report_time" class="form-control">
+                        </div>
+                        <div class="form-group mt-2">
                             <label for="status">Status</label>
                             <select name="status" required class="form-control">
                                 <option value="Active">Active</option>

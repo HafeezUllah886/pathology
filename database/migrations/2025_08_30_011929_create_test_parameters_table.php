@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('normal_range')->nullable();
             $table->string('type')->default('Numeric');
             $table->json('options')->nullable();
+            $table->integer('sort')->default(1);
             $table->timestamps();
         });
     }
