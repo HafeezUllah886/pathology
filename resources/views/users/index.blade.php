@@ -32,6 +32,7 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role }}</td>
                                     <td>
                                         <button type="button" class="btn btn-info " data-bs-toggle="modal"
                                             data-bs-target="#edit_{{ $user->id }}">Change Password</button>
@@ -94,6 +95,13 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" name="email" required id="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select name="role" id="role" class="form-control">
+                                <option value="Operator">Operator</option>
+                                <option value="Cashier">Cashier</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>

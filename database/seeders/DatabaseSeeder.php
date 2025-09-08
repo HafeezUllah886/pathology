@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
        $this->call(userSeeder::class);
+       $this->call(accountsSeeder::class);
        $this->call(unitsSeeder::class);
        $this->call(Biochemistry::class);
        $this->call(Haematology::class);

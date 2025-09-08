@@ -33,4 +33,14 @@ function projectNameShort()
     return "DL";
 }
 
+function projectAddress()
+{
+    return "Opposite Civil Hospital Quetta";
+}
+
+function projectContact()
+{
+    return "0331-0070041";
+}
+
 

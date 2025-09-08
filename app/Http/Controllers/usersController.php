@@ -11,12 +11,12 @@ class usersController extends Controller
 {
     public function index()
     {
-        if(auth()->user()->id != 1)
+        if(auth()->user()->role != "Admin")
         {
-            return to_route('receipt.index')->with('error', "Not allowed to access this page");
+            return to_route('dashboard')->with('error', "Not allowed to access this page");
         }
 
-        $users = User::where('id', '!=', 1)->get();
+        $users = User::where('role', '!=', "Admin")->get();
 
         return view('users.index',compact('users'));
     }
@@ -34,7 +34,7 @@ class usersController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'role' => 2
+                'role' => $request->role
             ]
         );
 

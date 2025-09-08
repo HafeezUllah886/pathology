@@ -61,46 +61,16 @@
                     </a>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sales" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarApps">
-                        <i class="ri-settings-line"></i><span data-key="t-apps">Settings</span>
+                    <a class="nav-link menu-link" href="{{route('receipts.create')}}">
+                        <i class="ri-add-line"></i> <span data-key="t-dashboards">Create Receipt</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sales">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{route('test_groups.index')}}" class="nav-link"
-                                    data-key="t-chat">Test Groups</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                </li> 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarFinance" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarFinance">
-                        <i class="ri-file-list-3-line"></i> <span data-key="t-forms">Finance</span>
+                    <a class="nav-link menu-link" href="{{route('receipts.index')}}">
+                        <i class="ri-add-line"></i> <span data-key="t-dashboards">History</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarFinance">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('accountsList', 'Business') }}" class="nav-link"
-                                    data-key="t-form-select">
-                                    Accounts </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('deposit_withdraw.index') }}" class="nav-link"
-                                    data-key="t-input-masks">Deposit / Withdraw</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('transfers.index') }}" class="nav-link"
-                                    data-key="t-advanced">Transfer</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('expenses.index') }}" class="nav-link" data-key="t-range-slider">
-                                    Expenses</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                </li> 
+               
             </ul>
         </div>
         <!-- Sidebar -->

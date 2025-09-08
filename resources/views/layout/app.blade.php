@@ -94,7 +94,7 @@
                                         src="{{ asset('assets/images/users/avatar-1.jpg') }}" alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ auth()->user()->name }}</span>
-                                        <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">{{ auth()->user()->role == 1 ? "Admin" : "Operator" }}</span>
+                                        <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">{{ auth()->user()->role}}</span>
                                     </span>
                                 </span>
                             </button>
@@ -104,7 +104,7 @@
                                 <a class="dropdown-item" href="{{route('profile')}}"><i
                                         class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle">Profile</span></a>
-                                        @if (auth()->user()->id == 1)
+                                        @if (auth()->user()->role == 'Admin')
                                         <a class="dropdown-item" href="{{ route('users') }}"><i
                                             class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                             class="align-middle" data-key="t-logout">Users</span></a>
@@ -120,7 +120,11 @@
         </header>
 
         <!-- ========== App Menu ========== -->
+        @if (auth()->user()->role == 'Cashier')
+        @include('layout.sidebar_cashier')
+        @else
         @include('layout.sidebar')
+        @endif
         <!-- Left Sidebar End -->
         <!-- Vertical Overlay-->
         <div class="vertical-overlay"></div>
