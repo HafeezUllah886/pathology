@@ -61,6 +61,11 @@
                     </a>
                 </li> 
                 <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{route('reporting.index')}}">
+                        <i class="ri-report-line"></i> <span data-key="t-dashboards">Reporting</span>
+                    </a>
+                </li> 
+                <li class="nav-item">
                     <a class="nav-link menu-link" href="#sales" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarApps">
                         <i class="ri-settings-line"></i><span data-key="t-apps">Settings</span>

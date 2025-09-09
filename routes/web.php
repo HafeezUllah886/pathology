@@ -7,6 +7,7 @@ require __DIR__ . '/auth.php';
 require __DIR__ . '/settings.php';
 require __DIR__ . '/receipts.php';
 require __DIR__ . '/finance.php';
+require __DIR__ . '/reporting.php';
 
 Route::middleware('auth')->group(function () {
     

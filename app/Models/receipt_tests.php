@@ -17,4 +17,19 @@ class receipt_tests extends Model
     {
         return $this->belongsTo(Tests::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'result_entered_by');
+    }
+
+    public function parameters()
+    {
+        return $this->belongsTo(receipt_tests_parameters::class);
+    }
+
+    public function status()
+    {
+        return $this->parameters()->count() > 0 ? "Result Entered" : "Pending";;
+    }
 }

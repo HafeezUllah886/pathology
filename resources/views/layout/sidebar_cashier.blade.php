@@ -67,7 +67,7 @@
                 </li> 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="{{route('receipts.index')}}">
-                        <i class="ri-add-line"></i> <span data-key="t-dashboards">History</span>
+                        <i class="ri-history-line"></i> <span data-key="t-dashboards">History</span>
                     </a>
                 </li> 
                
