@@ -19,7 +19,7 @@
                 @endif
                 <form action="{{ route('reporting.store') }}" method="post">
                     @csrf
-                    <table class="table" id="buttons-datatables">
+                    <table class="table no-padding" id="buttons-datatables">
                         <thead>
                             <th>Test</th>
                             <th>Unit</th>
@@ -30,28 +30,36 @@
                         <tbody>
                             @foreach ($parameters as $key => $parameter)
                             <input type="hidden" name="parameter_id[]" value="{{ $parameter->id }}">
-                                <tr id="row_{{ $key }}">
+                                <tr class="no-padding" id="row_{{ $key }}">
                                     @if($parameter->type == "Heading")
-                                    <th colspan="4">{{ $parameter->title }}</th>
+                                    <th colspan="4" class="no-padding">{{ $parameter->title }}</th>
+                                    <input type="hidden" name="result[]">
                                     @else
-                                    <td>{{ $parameter->title }}</td>
-                                    <td>{{ $parameter->unit }}</td>
-                                    <td>
+                                    <td class="no-padding">{{ $parameter->title }} @if($parameter->type == "Text" && $parameter->options != "") 
+                                            <span data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content=" @foreach ($parameter->options as $option)
+                                                    {{ $option }}, 
+                                                @endforeach">
+                                                <i class="ri-question-line text-info"></i>
+                                            </span>
+                                        
+                                        @endif</td>
+                                    <td class="no-padding">{{ $parameter->unit }}</td>
+                                    <td class="no-padding">
                                         @if($parameter->type == "Numaric")
-                                            <input type="number" name="result[]" step="any" required id="result_{{ $key }}" class="form-control">
+                                            <input type="number" name="result[]" step="any" required id="result_{{ $key }}" class="form-control no-padding">
                                         @elseif($parameter->type == "Text")
-                                            <textarea name="result[]" required rows="1" id="result_{{ $key }}" class="form-control autocomplete-textarea"></textarea>
+                                            <textarea name="result[]" required rows="1" id="result_{{ $key }}" class="form-control autocomplete-textarea no-padding"></textarea>
                                         @elseif($parameter->type == "Select")
-                                            <select name="result[]" required id="result_{{ $key }}" class="form-control">
+                                            <select name="result[]" required id="result_{{ $key }}" class="form-control no-padding">
                                                 @foreach ($parameter->options as $option)
                                                     <option value="{{ $option }}">{{ $option }}</option>
                                                 @endforeach
                                             </select>
                                         @endif
                                     </td>
-                                    <td><pre class="form-control">{{ $parameter->normal_range }}</pre></td>
+                                    <td class="no-padding">@if($parameter->normal_range != "")<pre class="form-control p-0 m-0">{{ $parameter->normal_range }}</pre>@endif</td>
                                     @endif
-                                    <td><button type="button" class="btn btn-danger" tabindex="-1" onclick="deleteParameter({{ $key }})">Delete</button></td>
+                                    <td class="no-padding"><button type="button" class="btn btn-danger no-padding" tabindex="-1" onclick="deleteParameter({{ $key }})">Delete</button></td>
                                 </tr>
                             @endforeach
                         </tbody>
