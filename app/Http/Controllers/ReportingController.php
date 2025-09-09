@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Receipt;
 use App\Models\receipt_tests;
+use App\Models\Test_parameters;
 
 class ReportingController extends Controller
 {
@@ -23,6 +24,20 @@ class ReportingController extends Controller
     {
         $tests = receipt_tests::where('receipt_id', $id)->get();
         $receipt = Receipt::find($id);
+        
         return view('reporting.tests', compact('tests', 'receipt'));
+    }
+
+    public function parameters($id)
+    {
+        $test = receipt_tests::find($id);
+        $parameters = Test_parameters::where('tests_id', $test->test_id)->get();
+
+        return view('reporting.result_entry', compact('test', 'parameters'));
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
     }
 }

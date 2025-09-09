@@ -53,13 +53,12 @@
                                                         <option value="{{ $unit->name }}" @selected($unit->name == $parameter->unit)>{{ $unit->name }}</option>
                                                     @endforeach
                                                 </select></td>
-                                                <td><textarea name="normal_range[]" required id="normal_range_{{ $key }}" class="form-control">{!! $parameter->normal_range !!}</textarea></td>
+                                                <td><textarea name="normal_range[]" id="normal_range_{{ $key }}" class="form-control">{!! $parameter->normal_range !!}</textarea></td>
                                                 <td><select name="type[]" required id="type_{{ $key }}" class="form-control"> <option value="Numaric" @selected($parameter->type == 'Numaric')>Numaric</option><option value="Text" @selected($parameter->type == 'Text')>Text</option><option value="Select" @selected($parameter->type == 'Select')>Select</option><option value="Heading" @selected($parameter->type == 'Heading')>Heading</option></select></td>
                                                 <td><textarea name="options[]" id="options_{{ $key }}" placeholder="Seperated by comma" class="form-control">{{ is_array($parameter->options) ? implode(', ', $parameter->options) : $parameter->options }}</textarea></td>
                                                 <td><span class="btn btn-sm btn-danger" onclick="deleteTestValue({{ $key }})">X</span></td>
                                             </tr>
                                             @endforeach
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -97,16 +96,16 @@
                 }
             });
         });
-     
+
         var test_id = {{ $test->parameters()->count() }};
         function addTestValue() {
             test_id++;
             var $newRow = $('<tr id="row_' + test_id + '">' +
                 '<td><input type="text" name="sort[]" required id="sort_' + test_id + '" class="form-control"></td>' +
                 '<td><input type="text" name="name[]" required id="name_' + test_id + '" class="form-control"></td>' +
-                '<td><select name="unit[]" required id="unit_' + test_id + '" class="form-control"><option value=""></option>@foreach ($units as $unit)<option value="{{ $unit->name }}">{{ $unit->name }}</option>@endforeach</select></td>' +
-                '<td><textarea name="normal_range[]" required id="normal_range_' + test_id + '" class="form-control"></textarea></td>' +
-                '<td><select name="type[]" required id="type_' + test_id + '" class="form-control"> <option value="Numaric">Numaric</option><option value="Text">Text</option><option value="Select">Select</option></select></td>' +
+                '<td><select name="unit[]"  id="unit_' + test_id + '" class="form-control"><option value=""></option>@foreach ($units as $unit)<option value="{{ $unit->name }}">{{ $unit->name }}</option>@endforeach</select></td>' +
+                '<td><textarea name="normal_range[]"  id="normal_range_' + test_id + '" class="form-control"></textarea></td>' +
+                '<td><select name="type[]" required id="type_' + test_id + '" class="form-control"> <option value="Numaric">Numaric</option><option value="Text">Text</option><option value="Select">Select</option><option value="Heading">Heading</option></select></td>' +
                 '<td><textarea name="options[]" id="options_' + test_id + '" placeholder="Seperated by comma" class="form-control"></textarea></td>' +
                 '<td><span class="btn btn-sm btn-danger" onclick="deleteTestValue(' + test_id + ')">X</span></td>' +
                 '</tr>');

@@ -21,12 +21,12 @@
                         <tbody>
                             @foreach ($tests as $key => $test)
                                 <tr >
-                                    <th >{{ $key + 1 }}</th>
-                                    <th>{{ $test->name }}</th>
-                                    <th>{{ $test->rate }}</th>
-                                    <th>{{ $test->report_time }}</th>
-                                    <th>{{ $test->status }}</th>
-                                    <th>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $test->name }}</td>
+                                    <td>{{ $test->rate }}</td>
+                                    <td>{{ $test->report_time }}</td>
+                                    <td>{{ $test->status }}</td>
+                                    <td>
                                         <div class="dropdown">
                                             <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">

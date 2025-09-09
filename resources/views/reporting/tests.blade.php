@@ -29,7 +29,7 @@
                             @foreach ($tests as $key => $test)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $test->test->name }}</td>
+                                    <td><a href="{{ route('reporting.tests.parameters', ['id' => $test->id]) }}">{{ $test->test->name }}</a></td>
                                     <td>{{ $test->result_entered_by ? $test->user->name : null }}</td>
                                     <td>{{ $test->result_entered_at ? date("d-m-Y", strtotime($test->result_entered_at)) : null }} {{  $test->result_entered_at ? \Carbon\Carbon::parse($test->result_entered_at)->format('h:i A') : null }}</td>
                                     <td>{{ $test->status() }}</td>
