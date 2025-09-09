@@ -62,7 +62,7 @@
                 </li> 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="{{route('reporting.index')}}">
-                        <i class="ri-report-line"></i> <span data-key="t-dashboards">Reporting</span>
+                        <i class="ri-article-line"></i> <span data-key="t-dashboards">Reporting</span>
                     </a>
                 </li> 
                 <li class="nav-item">
