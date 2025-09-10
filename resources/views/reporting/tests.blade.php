@@ -24,15 +24,40 @@
                             <th>Report Entered By</th>
                             <th>Report Entered On</th>
                             <th>Report Status</th>
+                            <th>Action</th>
                         </thead>
                         <tbody>
                             @foreach ($tests as $key => $test)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td><a href="{{ route('reporting.tests.parameters', ['id' => $test->id]) }}">{{ $test->test->name }}</a></td>
+                                    <td>@if($test->status() == "Result Entered") {{ $test->test->name }} @else <a href="{{ route('reporting.tests.parameters', ['id' => $test->id]) }}" class="text-info">{{ $test->test->name }}</a>@endif</td>
                                     <td>{{ $test->result_entered_by ? $test->user->name : null }}</td>
                                     <td>{{ $test->result_entered_at ? date("d-m-Y", strtotime($test->result_entered_at)) : null }} {{  $test->result_entered_at ? \Carbon\Carbon::parse($test->result_entered_at)->format('h:i A') : null }}</td>
                                     <td>{{ $test->status() }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="ri-more-fill align-middle"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                               
+                                                <li>
+                                                    <a class="dropdown-item" >
+                                                        <i class="ri-printer-fill align-bottom me-2 text-muted"></i>
+                                                        Print        
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item">
+                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
+                                                        Delete
+                                                    </a>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

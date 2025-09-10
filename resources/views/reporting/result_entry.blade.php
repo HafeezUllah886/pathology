@@ -45,7 +45,7 @@
                                         @endif</td>
                                     <td class="no-padding">{{ $parameter->unit }}</td>
                                     <td class="no-padding">
-                                        @if($parameter->type == "Numaric")
+                                        @if($parameter->type == "Numeric")
                                             <input type="number" name="result[]" step="any" required id="result_{{ $key }}" class="form-control no-padding">
                                         @elseif($parameter->type == "Text")
                                             <textarea name="result[]" required rows="1" id="result_{{ $key }}" class="form-control autocomplete-textarea no-padding"></textarea>
@@ -66,6 +66,7 @@
                     </table>
                     <input type="hidden" name="receipt_id" value="{{ $test->receipt_id }}">
                     <input type="hidden" name="test_id" value="{{ $test->test_id }}">
+                    <input type="hidden" name="receipt_test_id" value="{{ $test->id }}">
                     <div class="form-group">
                         <label for="notes">Notes</label>
                         <textarea name="notes" id="notes"  class="form-control w-100"></textarea>

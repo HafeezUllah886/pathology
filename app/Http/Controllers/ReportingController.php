@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Receipt;
 use App\Models\receipt_tests;
+use App\Models\receipt_tests_parameters;
 use App\Models\Test_parameters;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ReportingController extends Controller
 {
@@ -38,6 +41,45 @@ class ReportingController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        try
+        {
+            if($request->isNotFilled('parameter_id'))
+            {
+                throw new Exception('Please Add Atleast One Parameter');
+            }
+
+            DB::beginTransaction();
+
+            $receipt_test = receipt_tests::find($request->receipt_test_id);
+
+            $ids = $request->parameter_id;
+            
+            foreach ($ids as $key => $id) {
+                $parameter = Test_parameters::find($id);
+                receipt_tests_parameters::create([
+                    'receipt_test_id' => $receipt_test->id,
+                    'test_parameter_id' => $id,
+                    'value' => $request->result[$key],
+                    'is_heading' => $parameter->type == 'Heading' ? 'yes' : 'no',
+                    'unit' => $parameter->unit,
+                    'normal_range' => $parameter->normal_range,
+                ]);
+            }
+
+            $receipt_test->update([
+                'notes' => $request->notes,
+                'result_entered_by' => auth()->user()->id,
+                'result_entered_at' => now(),
+            ]);
+            
+            
+            DB::commit();
+            return to_route('reporting.tests.index', ['id' => $request->receipt_id])->with('success', 'Report Added Successfully');
+        }
+        catch(Exception $e)
+        {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

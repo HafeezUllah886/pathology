@@ -25,7 +25,7 @@ class receipt_tests extends Model
 
     public function parameters()
     {
-        return $this->belongsTo(receipt_tests_parameters::class, 'receipt_test_id');
+        return $this->hasMany(receipt_tests_parameters::class, 'receipt_test_id');
     }
 
     public function status()

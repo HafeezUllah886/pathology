@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('receipt_tests_parameters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('receipt_test_id')->constrained('receipt_tests')->cascadeOnDelete();
+            $table->bigInteger('test_parameter_id')->nullable();
             $table->string('value')->nullable();
             $table->enum('is_heading', ['yes', 'no'])->default('no');
             $table->string('unit')->nullable();

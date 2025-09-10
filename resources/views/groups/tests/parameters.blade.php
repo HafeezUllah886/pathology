@@ -54,7 +54,7 @@
                                                     @endforeach
                                                 </select></td>
                                                 <td><textarea name="normal_range[]" id="normal_range_{{ $key }}" class="form-control">{!! $parameter->normal_range !!}</textarea></td>
-                                                <td><select name="type[]" required id="type_{{ $key }}" class="form-control"> <option value="Numaric" @selected($parameter->type == 'Numaric')>Numaric</option><option value="Text" @selected($parameter->type == 'Text')>Text</option><option value="Select" @selected($parameter->type == 'Select')>Select</option><option value="Heading" @selected($parameter->type == 'Heading')>Heading</option></select></td>
+                                                <td><select name="type[]" required id="type_{{ $key }}" class="form-control"> <option value="Numeric" @selected($parameter->type == 'Numeric')>Numeric</option><option value="Text" @selected($parameter->type == 'Text')>Text</option><option value="Select" @selected($parameter->type == 'Select')>Select</option><option value="Heading" @selected($parameter->type == 'Heading')>Heading</option></select></td>
                                                 <td><textarea name="options[]" id="options_{{ $key }}" placeholder="Seperated by comma" class="form-control">{{ is_array($parameter->options) ? implode(', ', $parameter->options) : $parameter->options }}</textarea></td>
                                                 <td><span class="btn btn-sm btn-danger" onclick="deleteTestValue({{ $key }})">X</span></td>
                                             </tr>
