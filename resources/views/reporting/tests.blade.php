@@ -43,7 +43,7 @@
                                             <ul class="dropdown-menu dropdown-menu-end">
                                                
                                                 <li>
-                                                    <a class="dropdown-item" >
+                                                    <a class="dropdown-item" href="{{ route('reporting.print.testwise', $test->id) }}">
                                                         <i class="ri-printer-fill align-bottom me-2 text-muted"></i>
                                                         Print        
                                                     </a>

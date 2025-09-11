@@ -2588,6 +2588,7 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
+     * @property string|null $notes
      * @property int $refID
      * @property string|null $result_entered_at
      * @property int|null $result_entered_by
@@ -2599,7 +2600,8 @@ namespace App\Models {
      * @property-read \App\Models\receipt $receipt
      * @property-read \App\Models\Tests $test
      * @property-read \App\Models\User $user
-     * @property-read \App\Models\receipt_tests_parameters $parameters
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\receipt_tests_parameters> $parameters
+     * @property-read int|null $parameters_count
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereReceiptId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereTestId($value)
@@ -2608,6 +2610,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereResultEnteredBy($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereResultEnteredAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereRefid($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereNotes($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests newModelQuery()
@@ -2919,11 +2922,13 @@ namespace App\Models {
      * @property string|null $unit
      * @property mixed $is_heading
      * @property string|null $value
+     * @property int|null $test_parameter_id
      * @property int $receipt_test_id
      * @property int $id
      * @property-read \App\Models\receipt_tests $receipt_test
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereReceiptTestId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereTestParameterId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereValue($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereIsHeading($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereUnit($value)

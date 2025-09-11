@@ -35,12 +35,12 @@ function projectNameShort()
 
 function projectAddress()
 {
-    return "Opposite Civil Hospital Quetta";
+    return "MA Jinnah Road, Opposite Civil Hospital Quetta";
 }
 
 function projectContact()
 {
-    return "0331-0070041";
+    return "081-2837006, 0317-845289";
 }
 
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('reporting_time');
             $table->foreignId('result_entered_by')->nullable()->constrained('users');
             $table->dateTime('result_entered_at')->nullable();
+            $table->text("notes")->nullable();
             $table->bigInteger('refID');
             $table->timestamps();
         });

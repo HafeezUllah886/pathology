@@ -59,6 +59,7 @@ class ReportingController extends Controller
                 receipt_tests_parameters::create([
                     'receipt_test_id' => $receipt_test->id,
                     'test_parameter_id' => $id,
+                    'name' => $parameter->title,
                     'value' => $request->result[$key],
                     'is_heading' => $parameter->type == 'Heading' ? 'yes' : 'no',
                     'unit' => $parameter->unit,
@@ -81,5 +82,13 @@ class ReportingController extends Controller
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+
+    public function test_wise_print($id)
+    {
+        $test = receipt_tests::find($id);
+
+        return view('reporting.test_wise_print', compact('test'));
     }
 }
