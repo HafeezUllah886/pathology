@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Receipt;
+use App\Models\receipt as ModelsReceipt;
 use App\Models\receipt_tests;
 use App\Models\receipt_tests_parameters;
 use App\Models\Test_parameters;
@@ -90,5 +91,24 @@ class ReportingController extends Controller
         $receipt = Receipt::find($id);
 
         return view('reporting.printing.index', compact('receipt'));
+    }
+
+    public function print(Request $request)
+    {
+        if($request->isNotFilled('tests'))
+        {
+            return redirect()->back()->with('error', 'Please Select Atleast One Test');
+        }
+        $tests = receipt_tests::whereIn('id', $request->tests)->get();
+        $receipt = Receipt::find($request->receipt_id);
+
+       if($request->type == 1)
+       {
+        return view('reporting.printing.print', compact('tests', 'receipt'));
+       }
+       else
+       {
+        return view('reporting.printing.print_without_header', compact('tests', 'receipt'));
+       }
     }
 }

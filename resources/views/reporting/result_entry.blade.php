@@ -46,11 +46,11 @@
                                     <td class="no-padding">{{ $parameter->unit }}</td>
                                     <td class="no-padding">
                                         @if($parameter->type == "Numeric")
-                                            <input type="number" name="result[]" step="any" required id="result_{{ $key }}" class="form-control no-padding">
+                                            <input type="number" name="result[]" step="any" required id="result_{{ $key }}" class="form-control">
                                         @elseif($parameter->type == "Text")
-                                            <textarea name="result[]" required rows="1" id="result_{{ $key }}" class="form-control autocomplete-textarea no-padding"></textarea>
+                                            <textarea name="result[]" required rows="1" id="result_{{ $key }}" class="form-control autocomplete-textarea"></textarea>
                                         @elseif($parameter->type == "Select")
-                                            <select name="result[]" required id="result_{{ $key }}" class="form-control no-padding">
+                                            <select name="result[]" required id="result_{{ $key }}" class="form-control">
                                                 @foreach ($parameter->options as $option)
                                                     <option value="{{ $option }}">{{ $option }}</option>
                                                 @endforeach
@@ -59,7 +59,7 @@
                                     </td>
                                     <td class="no-padding">@if($parameter->normal_range != "")<pre class="form-control p-0 m-0"><p class="p-0 m-0">{!! $parameter->normal_range !!}</p></pre>@endif</td>
                                     @endif
-                                    <td class="no-padding"><button type="button" class="btn btn-danger no-padding" tabindex="-1" onclick="deleteParameter({{ $key }})">Delete</button></td>
+                                    <td class="no-padding"><button type="button" class="btn btn-danger" tabindex="-1" onclick="deleteParameter({{ $key }})">Delete</button></td>
                                 </tr>
                             @endforeach
                         </tbody>
