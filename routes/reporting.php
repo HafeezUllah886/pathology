@@ -12,5 +12,5 @@ Route::middleware('auth')->group(function () {
    Route::get('reporting/tests/{id}/parameters', [ReportingController::class, 'parameters'])->name('reporting.tests.parameters');
    Route::post('reporting/store', [ReportingController::class, 'store'])->name('reporting.store');
 
-   Route::get('reporting/print/test_wise/{id}', [ReportingController::class, 'test_wise_print'])->name('reporting.print.testwise');
+   Route::get('reporting/print/{id}', [ReportingController::class, 'print_filter'])->name('reporting.print.filter');
 });

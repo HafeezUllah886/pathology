@@ -85,10 +85,10 @@ class ReportingController extends Controller
     }
 
 
-    public function test_wise_print($id)
+    public function print_filter($id)
     {
-        $test = receipt_tests::find($id);
+        $receipt = Receipt::find($id);
 
-        return view('reporting.test_wise_print', compact('test'));
+        return view('reporting.printing.index', compact('receipt'));
     }
 }

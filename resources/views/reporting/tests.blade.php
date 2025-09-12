@@ -6,6 +6,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h3>Reporting - {{$receipt->id}} | {{$receipt->patient_name}} | {{$receipt->patient_age}} | {{$receipt->patient_gender}}</h3>
+                    <a href="{{ route('reporting.print.filter', $receipt->id) }}" class="btn btn-primary">Print</a>
                 </div>
                 <div class="card-body">
                     @if ($errors->any())
@@ -42,12 +43,12 @@
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
                                                
-                                                <li>
+                                               {{--  <li>
                                                     <a class="dropdown-item" href="{{ route('reporting.print.testwise', $test->id) }}">
                                                         <i class="ri-printer-fill align-bottom me-2 text-muted"></i>
                                                         Print        
                                                     </a>
-                                                </li>
+                                                </li> --}}
                                                 <li>
                                                     <a class="dropdown-item">
                                                         <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
