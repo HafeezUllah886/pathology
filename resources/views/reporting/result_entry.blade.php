@@ -57,7 +57,7 @@
                                             </select>
                                         @endif
                                     </td>
-                                    <td class="no-padding">@if($parameter->normal_range != "")<pre class="form-control p-0 m-0">{{ $parameter->normal_range }}</pre>@endif</td>
+                                    <td class="no-padding">@if($parameter->normal_range != "")<pre class="form-control p-0 m-0"><p class="p-0 m-0">{!! $parameter->normal_range !!}</p></pre>@endif</td>
                                     @endif
                                     <td class="no-padding"><button type="button" class="btn btn-danger no-padding" tabindex="-1" onclick="deleteParameter({{ $key }})">Delete</button></td>
                                 </tr>

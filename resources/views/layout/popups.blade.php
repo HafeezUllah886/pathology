@@ -24,6 +24,20 @@
     <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('assets/libs/toastify/toastify.min.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+        .no-padding {
+            padding: 0 !important;
+            line-height: 1 !important;
+        }
+        .pre-like-p {
+            font-family: inherit;   /* use normal page font instead of monospace */
+            font-size: var(--vz-body-font-size);        /* normal paragraph size */
+            white-space: pre-wrap;  /* keep line breaks but allow wrapping */
+            word-wrap: break-word;  /* prevent overflow */
+            margin: 0 0 1em;        /* same as <p> */
+            overflow: hidden;  
+        }
+    </style>
     @yield('page-css')
 
 </head>
