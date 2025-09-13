@@ -10,7 +10,7 @@ class Tests extends Model
 
     public function parameters()
     {
-        return $this->hasMany(test_parameters::class);
+        return $this->hasMany(Test_parameters::class);
     }
 
     public function group()
