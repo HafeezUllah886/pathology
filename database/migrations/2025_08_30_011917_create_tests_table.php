@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('rate', 10, 2);
             $table->string('report_time')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
+            $table->json('remarks')->nullable();
             $table->timestamps();
         });
     }

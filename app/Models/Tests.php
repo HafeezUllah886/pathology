@@ -22,4 +22,8 @@ class Tests extends Model
     {
         return $query->where('status', 'active');
     }
+
+    protected $casts = [
+        'remarks' => 'array',
+    ];
 }

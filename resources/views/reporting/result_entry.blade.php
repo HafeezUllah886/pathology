@@ -68,8 +68,18 @@
                     <input type="hidden" name="test_id" value="{{ $test->test_id }}">
                     <input type="hidden" name="receipt_test_id" value="{{ $test->id }}">
                     <div class="form-group">
-                        <label for="notes">Notes</label>
+                        <label for="notes">Remarks</label>
                         <textarea name="notes" id="notes"  class="form-control w-100"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remarks">Add Remarks</label>
+                        <select id="remarks" class="selectize">
+                            <option value=""></option>
+                            @foreach ($test->test->remarks as $remark)
+                                <option value="{{ $remark }}">{{ $remark }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary mt-2 w-100">Save Report</button>
                 </form>
@@ -79,8 +89,29 @@
     </div>
 @endsection
 
+@section('page-css')
+    <link rel="stylesheet" href="{{ asset('assets/libs/selectize/selectize.min.css') }}">
+@endsection
+
 @section('page-js')
+<script src="{{ asset('assets/libs/selectize/selectize.min.js') }}"></script>
 <script>
+    $(".selectize").selectize({
+        onChange: function(value) {
+            if (!value.length) return;
+            if (value != 0) {
+                add_remarks(value);
+                this.clear();
+                this.focus();
+            }
+        },
+    });
+
+    function add_remarks(value)
+    {
+        $("#notes").append(value + "\n");
+    }
+
 function deleteParameter(id) {
         $('#row_' + id).remove();
     }

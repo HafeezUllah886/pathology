@@ -66,6 +66,7 @@
 
                         </div>
                         <div class="col-12 mt-2">
+                            <textarea name="remarks" id="remarks" cols="30" class="form-control" rows="5" placeholder="Seperated by comma">{{ is_array($test->remarks) ? implode(', ', $test->remarks) : $test->remarks }}</textarea>
                             <button type="submit" class="btn btn-primary w-100">Save</button>
                         </div>
                 </div>

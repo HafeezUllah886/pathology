@@ -62,13 +62,13 @@
                                             <td class="no-padding">{{$parameter->name}}</td>
                                             <td class="no-padding">{{$parameter->value}}</td>
                                             <td class="no-padding">{{$parameter->unit}}</td>
-                                            <td class="no-padding"><pre class='pre-like-p no-padding m-0'>{!! $parameter->normal_range !!}</pre></td>
+                                            <td class="no-padding"><pre class='pre-like-p no-padding m-0'><{!! $parameter->normal_range !!}</pre></td>
                                             @endif
                                         </tr>
                                     @endforeach
                                 </table>
                                 @if($test->notes != "")
-                                <p class="no-padding"> <strong>Remarks:</strong> {{$test->notes}}</p>
+                                <p class="no-padding mt-2 mb-0"> <strong class="no-padding">Remarks:</strong> <pre class='pre-like-p no-padding m-0'>{!!$test->notes!!}</pre></p>
                                 @endif
                                 @endforeach
                             </div>

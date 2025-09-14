@@ -50,6 +50,9 @@ class TestParametersController extends Controller
                 'options' => array_map('trim', explode(',', $request->options[$key])),
         ]);
     }
+
+    $test->remarks = array_map('trim', explode(',', $request->remarks));
+    $test->save();
     return redirect()->route('tests.index', ['id' => $test->id]);
     }
 
