@@ -67,6 +67,7 @@
                                                 <i class="ri-more-fill align-middle"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
+                                                @if(auth()->user()->role == "Cashier")
                                                
                                                 <li>
                                                     <a class="dropdown-item" href="{{ route('receipts.show', $receipt->id)}}">
@@ -74,13 +75,25 @@
                                                         Print
                                                     </a>
                                                 </li>
-                                               {{--  <li>
-                                                    <a class="dropdown-item"
-                                                        href="">
-                                                        <i class="ri-stack-fill align-bottom me-2 text-muted"></i>
-                                                        Manage Tests
+                                                @endif
+
+                                                @if (auth()->user()->role == "Admin")
+
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('receipts.edit', $receipt->id)}}">
+                                                        <i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
+                                                        Edit
                                                     </a>
-                                                </li> --}}
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('receipts.edit', $receipt->id)}}">
+                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-danger"></i>
+                                                        Cancel
+                                                    </a>
+                                                </li>
+                                                    
+                                                @endif
+                                               
                                                 
                                             </ul>
                                         </div>

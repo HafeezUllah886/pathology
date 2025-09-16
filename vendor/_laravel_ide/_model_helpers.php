@@ -644,6 +644,7 @@ namespace App\Models {
 	 *
 	 * @property \Illuminate\Support\Carbon|null $updated_at
 	 * @property \Illuminate\Support\Carbon|null $created_at
+	 * @property array|null $remarks
 	 * @property mixed $status
 	 * @property string|null $report_time
 	 * @property float $rate
@@ -659,6 +660,7 @@ namespace App\Models {
 	 * @method static \Illuminate\Database\Eloquent\Builder<Tests>|Tests whereRate($value)
 	 * @method static \Illuminate\Database\Eloquent\Builder<Tests>|Tests whereReportTime($value)
 	 * @method static \Illuminate\Database\Eloquent\Builder<Tests>|Tests whereStatus($value)
+	 * @method static \Illuminate\Database\Eloquent\Builder<Tests>|Tests whereRemarks($value)
 	 * @method static \Illuminate\Database\Eloquent\Builder<Tests>|Tests whereCreatedAt($value)
 	 * @method static \Illuminate\Database\Eloquent\Builder<Tests>|Tests whereUpdatedAt($value)
 	 * @method static \Illuminate\Database\Eloquent\Builder<Tests>|Tests active()

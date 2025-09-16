@@ -123,9 +123,13 @@ class ReceiptController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(receipt $receipt)
+    public function edit($id)
     {
-        //
+        $receipt = receipt::find($id);
+
+        $tests = Tests::active()->get();
+        $accounts = accounts::business()->get();
+        return view('cashier.edit_receipt', compact('tests', 'accounts', 'receipt'));
     }
 
     /**

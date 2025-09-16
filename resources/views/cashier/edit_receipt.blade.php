@@ -1,10 +1,18 @@
 @extends('layout.app')
 @section('content')
+<script>
+    var existingTest = [];
+
+    @foreach ($receipt->receipt_tests as $test)
+        existingTest.push({{ $test->test_id }});
+    @endforeach
+
+</script>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h3>Create Receipt</h3>
+                    <h3>Edit Receipt</h3>
                 </div>
                 <div class="card-body">
                     @if ($errors->any())
@@ -16,28 +24,28 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('receipts.store') }}" method="post">
+                    <form action="{{ route('receipts.update', $receipt->id) }}" method="post">
                         @csrf
                        <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="name">Patient Name</label>
-                                <input type="text" name="patient_name" required id="patient_name" class="form-control">
+                                <input type="text" name="patient_name" required id="patient_name" class="form-control" value="{{ $receipt->patient_name }}">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="name">Patient Age</label>
-                                <input type="text" name="patient_age" id="patient_age" class="form-control">
+                                <input type="text" name="patient_age" id="patient_age" class="form-control" value="{{ $receipt->patient_age }}">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="name">Patient Gender</label>
                                <select name="patient_gender" id="patient_gender" class="form-control">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
+                                <option value="Male" {{ $receipt->patient_gender == 'Male' ? 'selected' : '' }}>Male</option>
+                                <option value="Female" {{ $receipt->patient_gender == 'Female' ? 'selected' : '' }}>Female</option>
+                                <option value="Other" {{ $receipt->patient_gender == 'Other' ? 'selected' : '' }}>Other</option>
                                </select>
                             </div>
                         </div>
@@ -46,7 +54,7 @@
                                 <label for="name">Patient Contact</label>
                                 <div class="input-group">
                                     <span class="input-group-text">+92</span>
-                                 <input type="text" name="patient_contact" id="patient_contact" placeholder="3456789012" class="form-control">
+                                 <input type="text" name="patient_contact" id="patient_contact" placeholder="3456789012" class="form-control" value="{{ $receipt->patient_contact }}">
                                 </div>
                             </div>
                         </div>
@@ -72,22 +80,33 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tests_list">
-                                    
+                                    @foreach ($receipt->receipt_tests as $test)
+                                    @php
+                                        $id  = $test->test_id;
+                                    @endphp
+                                        <tr id="row_{{ $id }}">
+                                            <td class="no-padding"><span class="text-info font-size-18">{{ $test->test->name }}</span><br>{{ $test->test->parameters->pluck('title')->implode(', ') }}</td>
+                                            <td class="no-padding">{{ $test->reporting_time }}</td>
+                                            <td class="no-padding"><input type="number" name="rate[]" oninput="updateChanges()" min="0" required step="any" value="{{ $test->price }}" class="form-control text-center no-padding" id="rate_{{ $id }}"></td>
+                                            <td class="no-padding"> <span class="btn btn-sm btn-danger" onclick="deleteRow({{ $id }})">X</span> </td>
+                                            <input type="hidden" name="id[]" value="{{ $test->id }}">
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th colspan="2" class="text-end no-padding">Total</th>
-                                        <th id="total" class="no-padding text-end">0.00</th>
+                                        <th id="total" class="no-padding text-end">{{ $receipt->amount }}</th>
                                         <th></th>
                                     </tr>
                                     <tr>
                                         <th colspan="2" class="text-end no-padding">Discount</th>
-                                        <th class="no-padding"><input type="number" name="discount" value="0" id="discount" oninput="updateChanges()" class="form-control text-center m-0 no-padding"></th>
+                                        <th class="no-padding"><input type="number" name="discount" value="{{ $receipt->discount }}" id="discount" oninput="updateChanges()" class="form-control text-center m-0 no-padding"></th>
                                         <th></th>
                                     </tr>
                                     <tr>
                                         <th colspan="2" class="text-end no-padding">Net Total</th>
-                                        <th id="net_total" class="no-padding text-end">0.00</th>
+                                        <th id="net_total" class="no-padding text-end">{{ $receipt->net_amount }}</th>
                                         <th></th>
                                     </tr>
                                 </tfoot>
@@ -96,19 +115,19 @@
                         <div class="col-md-3 mt-2">
                             <div class="form-group">
                                 <label for="name">Refered By</label>
-                                <input type="text" name="refered_by" id="refered_by" class="form-control">
+                                <input type="text" name="refered_by" id="refered_by" value="{{ $receipt->refered_by }}" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3 mt-2">
                             <div class="form-group">
                                 <label for="name">Entery Time</label>
-                                <input type="datetime-local" name="entery_time" value="{{ now()->format('Y-m-d\TH:i') }}" id="entery_time" class="form-control">
+                                <input type="datetime-local" name="entery_time" value="{{ $receipt->entery_time }}" id="entery_time" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3 mt-2">
                             <div class="form-group">
                                 <label for="name">Reporting Time</label>
-                                <input type="datetime-local" name="reporting_time" value="{{ now()->addHours(2)->format('Y-m-d\TH:i') }}" id="reporting_time" class="form-control">
+                                <input type="datetime-local" name="reporting_time" value="{{ $receipt->reporting_time }}" id="reporting_time" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3 mt-2">
@@ -116,7 +135,7 @@
                                 <label for="name">Paid In</label>
                                <select name="paid_in" id="paid_in" class="form-control">
                                 @foreach ($accounts as $account)
-                                    <option value="{{ $account->id }}">{{ $account->title }}</option>
+                                    <option value="{{ $account->id }}" {{ $account->id == $receipt->paid_in ? 'selected' : '' }}>{{ $account->title }}</option>
                                 @endforeach
                                </select>
                             </div>
@@ -124,7 +143,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="name">Notes</label>
-                                <textarea name="notes" id="notes" class="form-control"></textarea>
+                                <textarea name="notes" id="notes" class="form-control">{{ $receipt->notes }}</textarea>
                             </div>
                         </div>
                         <div class="col-12 mt-2">
@@ -158,7 +177,7 @@
         },
     });
 
-    var existingTest = [];
+
         function getSingleTest(id) {
             $.ajax({
                 url: "{{ url('receipt/getsingletest/') }}/" + id,
@@ -203,7 +222,7 @@
             $('#net_total').html(net_total.toFixed(2));
            
         }
-        
+
         function deleteRow(id) {
             $('#row_' + id).remove();
             existingTest = $.grep(existingTest, function(value) {
