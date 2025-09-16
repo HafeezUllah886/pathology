@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\accounts;
 use App\Models\receipt;
 use App\Models\receipt_tests;
+use App\Models\receipt_tests_parameters;
 use App\Models\Tests;
 use Exception;
 use Illuminate\Http\Request;
@@ -135,9 +136,83 @@ class ReceiptController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, receipt $receipt)
+    public function update(Request $request, $id)
     {
-        //
+        try
+        {
+             if($request->isNotFilled('id'))
+             {
+                 throw new Exception('Please Select Atleast One Test');
+             }
+ 
+             DB::beginTransaction();
+ 
+            
+             $receipt = receipt::find($id)->update([
+                 'patient_name'      => $request->patient_name,
+                 'patient_age'       => $request->patient_age,
+                 'patient_gender'    => $request->patient_gender,
+                 'patient_contact'   => $request->patient_contact,
+                 'refered_by'        => $request->refered_by,
+                 'entery_time'       => $request->entery_time,
+                 'reporting_time'    => $request->reporting_time,
+                 'discount'          => $request->discount,
+                 'paid_in'           => $request->paid_in,
+                 'notes'             => $request->notes,
+             ]);
+ 
+ 
+        $submittedItems[]= $request->id;
+      
+        $existingItems = receipt_tests::where('receipt_id', $id)->pluck('test_id')->toArray();
+
+        $toDelete = array_diff($existingItems, $submittedItems);
+
+        foreach($toDelete as $id)
+        {
+            receipt_tests_parameters::where('receipt_test_id', $id)->delete();
+        }
+        receipt_tests::whereIn('id', $toDelete)->delete();
+      
+        foreach ($submittedItems as $item) {
+
+            if (isset($item['id']) && in_array($item['id'], $existingIds)) {
+                
+                $model = bill_details::find($item['id']);
+                $model->update([
+                    'qty' => $item['qty'],
+                    'amount' => $item['amount'],
+                ]);
+            } else {
+                $new_ref = getRef();
+                bill_details::create([
+                    'billID'        => $id,
+                    'itemID'        => $item['itemID'],
+                    'sizeID'        => $item['size'],
+                    'price'         => $item['price'],
+                    'qty'           => $item['qty'],
+                    'amount'        => $item['amount'],
+                    'date'          => $bill->date,
+                    'refID'         => $new_ref,
+                ]);
+            }
+ 
+             $user = auth()->user()->name;
+ 
+             $notes = "Receipt Created By $user for Patient $request->patient_name Lab ID # $receipt->id";
+ 
+             createTransaction($request->paid_in, now(), $net, 0, $notes, $ref);
+ 
+             DB::commit();
+ 
+             return to_route('receipts.show', $receipt->id);
+        }
+    }
+        catch(Exception $e)
+        {
+          DB::rollBack();
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     /**
