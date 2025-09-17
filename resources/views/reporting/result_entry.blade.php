@@ -76,7 +76,7 @@
                         <label for="remarks">Add Remarks</label>
                         <select id="remarks" class="selectize">
                             <option value=""></option>
-                            @foreach ($test->test->remarks as $remark)
+                            @foreach (($test->test->remarks ?? []) as $remark)
                                 <option value="{{ $remark }}">{{ $remark }}</option>
                             @endforeach
                         </select>
