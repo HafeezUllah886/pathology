@@ -86,10 +86,10 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="{{ route('receipts.edit', $receipt->id)}}">
+                                                    <button class="dropdown-item" onclick="cancelReceipt({{ $receipt->id }})">
                                                         <i class="ri-delete-bin-fill align-bottom me-2 text-danger"></i>
                                                         Cancel
-                                                    </a>
+                                                    </button>
                                                 </li>
                                                     
                                                 @endif
@@ -112,6 +112,41 @@
             </div>
         </div>
     </div>
+    <div id="cancelModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"
+        style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Cancel Receipt</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                </div>
+                <form action="{{ route('receipts.cancel') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="receipt_id" id="receipt_id">
+                    <div class="modal-body">
+                        <div class="form-group mt-2">
+                            <label for="reason">Reason</label>
+                            <input type="text" name="reason" required id="reason"
+                                class="form-control">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="account">Account</label>
+                            <select name="account" required id="account" class="form-control">
+                                <option value=""></option>
+                                @foreach ($accounts as $account)
+                                    <option value="{{ $account->id }}">{{ $account->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
 
 @section('page-css')
@@ -131,4 +166,11 @@
     <script src="{{ asset('assets/libs/datatable/jszip.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
+
+    <script>
+        function cancelReceipt(id) {
+            document.getElementById('receipt_id').value = id;
+            $('#cancelModal').modal('show');
+        }
+    </script>
 @endsection

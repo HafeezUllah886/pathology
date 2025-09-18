@@ -2246,45 +2246,9 @@ namespace App\Models {
     /**
      * App\Models\receipt
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string|null $notes
-     * @property int $refID
-     * @property mixed $status
-     * @property int $paid_in
-     * @property float $net_amount
-     * @property float $discount
-     * @property float $amount
-     * @property int $entered_by
-     * @property string|null $reporting_time
-     * @property string|null $entery_time
-     * @property string|null $refered_by
-     * @property string|null $patient_contact
-     * @property string|null $patient_gender
-     * @property string|null $patient_age
-     * @property string $patient_name
-     * @property int $id
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\receipt_tests> $receipt_tests
      * @property-read int|null $receipt_tests_count
      * @property-read \App\Models\User $user
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt wherePatientName($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt wherePatientAge($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt wherePatientGender($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt wherePatientContact($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereReferedBy($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereEnteryTime($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereReportingTime($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereEnteredBy($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereAmount($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereDiscount($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereNetAmount($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt wherePaidIn($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereStatus($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereRefid($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereNotes($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<receipt>|receipt query()
@@ -2588,33 +2552,11 @@ namespace App\Models {
     /**
      * App\Models\receipt_tests
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property int $refID
-     * @property string|null $notes
-     * @property string|null $result_entered_at
-     * @property int|null $result_entered_by
-     * @property string $reporting_time
-     * @property float $price
-     * @property int $test_id
-     * @property int $receipt_id
-     * @property int $id
      * @property-read \App\Models\receipt $receipt
      * @property-read \App\Models\Tests $test
      * @property-read \App\Models\User $user
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\receipt_tests_parameters> $parameters
      * @property-read int|null $parameters_count
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereReceiptId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereTestId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests wherePrice($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereReportingTime($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereResultEnteredBy($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereResultEnteredAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereNotes($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereRefid($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests>|receipt_tests query()
@@ -2918,27 +2860,7 @@ namespace App\Models {
     /**
      * App\Models\receipt_tests_parameters
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string|null $normal_range
-     * @property string|null $unit
-     * @property mixed $is_heading
-     * @property string|null $value
-     * @property string|null $name
-     * @property int|null $test_parameter_id
-     * @property int $receipt_test_id
-     * @property int $id
      * @property-read \App\Models\receipt_tests $receipt_test
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereReceiptTestId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereTestParameterId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereName($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereValue($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereIsHeading($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereUnit($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereNormalRange($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<receipt_tests_parameters>|receipt_tests_parameters query()

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2)->default(0);
             $table->decimal('discount', 10, 2)->default(0);
             $table->decimal('net_amount', 10, 2)->default(0);
+            $table->text('cancel_reason')->nullable();
             $table->foreignId('paid_in')->constrained('accounts')->cascadeOnDelete();
             $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
             $table->bigInteger('refID');

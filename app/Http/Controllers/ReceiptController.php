@@ -20,10 +20,11 @@ class ReceiptController extends Controller
     {
         $from = $request->from ?? date('Y-m-d');
         $to =  $request->to ?? date('Y-m-d');
+        $accounts = accounts::business()->get();
 
         $receipts = receipt::whereDate('entery_time', '>=', $from)->whereDate('entery_time', '<=', $to)->orderBy('id', 'desc')->get();
 
-        return view('cashier.index', compact('receipts', 'from', 'to'));
+        return view('cashier.index', compact('receipts', 'from', 'to', 'accounts'));
     }
 
     /**
@@ -232,9 +233,29 @@ class ReceiptController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(receipt $receipt)
+    public function cancel(Request $request)
     {
-        //
+        try
+        {
+            $receipt = receipt::find($request->receipt_id);
+            DB::beginTransaction();
+            $receipt->update([
+                'status' => 'cancelled',
+                'cancel_reason' => $request->reason,
+            ]);
+
+            $user = auth()->user()->name;
+            $notes = "Receipt Cancelled By $user for Patient $receipt->patient_name Lab ID # $receipt->id";
+
+            createTransaction($request->account, now(), 0, $receipt->amount, $notes, $receipt->refID);
+            DB::commit();
+            return to_route('receipts.index')->with('success', 'Receipt Cancelled Successfully');
+        }
+        catch(Exception $e)
+        {
+            DB::rollBack();
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     
