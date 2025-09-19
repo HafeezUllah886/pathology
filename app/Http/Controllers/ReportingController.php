@@ -16,7 +16,6 @@ class ReportingController extends Controller
 {
     public function index(Request $request)
     {
-
         $status = $request->status ?? "pending";
         $from = $request->from ?? firstDayOfMonth();
         $to = $request->to ?? lastDayOfMonth();
@@ -77,6 +76,67 @@ class ReportingController extends Controller
             
             DB::commit();
             return to_route('reporting.tests.index', ['id' => $request->receipt_id])->with('success', 'Report Added Successfully');
+        }
+        catch(Exception $e)
+        {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function edit($id)
+    {
+        $test = receipt_tests::find($id);
+        $parameters = Test_parameters::where('tests_id', $test->test_id)->get();
+        $receipt_test_parameters = receipt_tests_parameters::where('receipt_test_id', $test->id)->get();
+
+        foreach($parameters as $parameter)
+        {
+            $parameter->value =  $receipt_test_parameters->where('test_parameter_id', $parameter->id)->first()->value;
+        }
+
+        return view('reporting.edit', compact('test', 'parameters'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        try
+        {
+            if($request->isNotFilled('parameter_id'))
+            {
+                throw new Exception('Please Add Atleast One Parameter');
+            }
+
+            DB::beginTransaction();
+
+            $receipt_test = receipt_tests::find($request->receipt_test_id);
+
+            $receipt_test->parameters()->delete();
+
+            $ids = $request->parameter_id;
+            
+            foreach ($ids as $key => $id) {
+                $parameter = Test_parameters::find($id);
+                receipt_tests_parameters::create([
+                    'receipt_test_id' => $receipt_test->id,
+                    'test_parameter_id' => $id,
+                    'name' => $parameter->title,
+                    'value' => $request->result[$key],
+                    'is_heading' => $parameter->type == 'Heading' ? 'yes' : 'no',
+                    'unit' => $parameter->unit,
+                    'normal_range' => $parameter->normal_range,
+                ]);
+            }
+
+            $receipt_test->update([
+                'notes' => $request->notes,
+                'result_entered_by' => auth()->user()->id,
+                'result_entered_at' => now(),
+            ]);
+            
+            
+            DB::commit();
+            return to_route('reporting.tests.index', ['id' => $request->receipt_id])->with('success', 'Report Updated Successfully');
         }
         catch(Exception $e)
         {

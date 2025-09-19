@@ -42,20 +42,14 @@
                                                 <i class="ri-more-fill align-middle"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
-                                               
-                                               {{--  <li>
-                                                    <a class="dropdown-item" href="{{ route('reporting.print.testwise', $test->id) }}">
-                                                        <i class="ri-printer-fill align-bottom me-2 text-muted"></i>
-                                                        Print        
-                                                    </a>
-                                                </li> --}}
-                                                <li>
-                                                    <a class="dropdown-item">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Delete
+                                               @if($test->status() == "Result Entered")
+                                               <li>
+                                                    <a class="dropdown-item" href="{{ route('reporting.edit', $test->id) }}">
+                                                        <i class="ri-edit-fill align-bottom me-2 text-muted"></i>
+                                                        Re-Enter Result        
                                                     </a>
                                                 </li>
-                                                
+                                                @endif
                                             </ul>
                                         </div>
                                     </td>
